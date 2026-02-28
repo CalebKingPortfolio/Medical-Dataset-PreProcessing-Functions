@@ -44,4 +44,5 @@ def remove_missing_row_function(df):
            empty_instruction_rows_processed,
            empty_input_rows_processed,
            empty_output_rows_processed,
-           missing_row_count_processed)
+           missing_row_count_processed,
+           processed_missing_df)
