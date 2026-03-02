@@ -1,5 +1,8 @@
 def remove_extra_spaces_function(processed_duplicates_df):
 
+  # import re library since wasn't working outside
+  import re
+
   # gives the dataframe another name
   unprocessed_spaces_df = processed_duplicates_df
 
