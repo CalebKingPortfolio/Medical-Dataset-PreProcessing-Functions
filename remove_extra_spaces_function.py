@@ -11,8 +11,8 @@ def remove_extra_spaces_function(processed_duplicates_df):
   leading_trailing_spaces_unprocessed = unprocessed_spaces_df.apply(lambda col: col.str.contains(r'^\s+|\s+$', na=False)).sum().sum()
 
   # removes extra spaces at the beginning and end (including newlines)
-  # IMPORTANT: We save the result back into unprocessed_spaces_df so the next step sees the changes
   unprocessed_spaces_df = unprocessed_spaces_df.replace(r'^\s+|\s+$', '', regex=True)
+  unprocessed_spaces_df = unprocessed_spaces_df.applymap(lambda x: re.sub(r'[ \t]+$', '', x, flags=re.MULTILINE))
 
   # count number of cells with extra spaces at the start or end AFTER cleaning
   leading_trailing_spaces_processed = unprocessed_spaces_df.apply(lambda col: col.str.contains(r'^\s+|\s+$', na=False)).sum().sum()
@@ -47,3 +47,5 @@ def remove_extra_spaces_function(processed_duplicates_df):
          extra_spaces_output_processed,
          extra_spaces_ds,
          processed_spaces_df)
+
+(leading_trailing_spaces_unprocessed,leading_trailing_spaces_processed, extra_spaces_instruction_unprocessed, extra_spaces_input_unprocessed, extra_spaces_output_unprocessed,extra_spaces_instruction_processed, extra_spaces_input_processed, extra_spaces_output_processed,extra_spaces_ds,processed_spaces_df) = remove_extra_spaces_function(processed_duplicates_df)
