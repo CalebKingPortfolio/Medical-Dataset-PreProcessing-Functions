@@ -28,5 +28,8 @@ def remove_extra_spaces_function(processed_duplicates_df):
   # count total number of extra spaces
   processed_total_matches = processed_spaces_df.apply(lambda col: col.astype(str).apply(lambda x: sum(len(m) - 1 for m in re.findall(r'[ ]{2,}', x)))).sum().sum()
 
+  # gets the size of the dataset
+  extra_spaces_ds = len(processed_spaces_df)
+  
   # returns variables used within the function
-  return(cells_with_extra_spaces_unprocessed, cells_with_extra_spaces_processed,unprocessed_total_matches,processed_total_matches, processed_spaces_df)
+  return(cells_with_extra_spaces_unprocessed, cells_with_extra_spaces_processed,unprocessed_total_matches,processed_total_matches, extra_spaces_ds, processed_spaces_df)
