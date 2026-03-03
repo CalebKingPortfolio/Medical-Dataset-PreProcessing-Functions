@@ -3,7 +3,7 @@ import re
 def remove_extra_spaces_function(processed_duplicates_df):
 
   # gives the dataframe another name
-  unprocessed_spaces_df = processed_duplicates_df.copy().astype(str)
+  unprocessed_spaces_df = processed_duplicates_df
 
   # SPACES AT START AND END
 
