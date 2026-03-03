@@ -47,5 +47,3 @@ def remove_extra_spaces_function(processed_duplicates_df):
          extra_spaces_output_processed,
          extra_spaces_ds,
          processed_spaces_df)
-
-(leading_trailing_spaces_unprocessed,leading_trailing_spaces_processed, extra_spaces_instruction_unprocessed, extra_spaces_input_unprocessed, extra_spaces_output_unprocessed,extra_spaces_instruction_processed, extra_spaces_input_processed, extra_spaces_output_processed,extra_spaces_ds,processed_spaces_df) = remove_extra_spaces_function(processed_duplicates_df)
