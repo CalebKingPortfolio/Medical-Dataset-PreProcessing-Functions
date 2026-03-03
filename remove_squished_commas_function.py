@@ -1,3 +1,6 @@
+# import re library since wasn't working outside
+import re
+
 def remove_squished_commas_function(processed_spaces_df):
 
   # gives the dataframe another name
