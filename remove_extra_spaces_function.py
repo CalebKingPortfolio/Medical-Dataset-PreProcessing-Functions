@@ -9,7 +9,7 @@ def remove_extra_spaces_function(processed_duplicates_df):
   # SPACES AT START AND END
 
   # count number of cells with extra spaces at the start or end
-  cells_with_extra_spaces_unprocessed = unprocessed_spaces_df.apply(lambda col: col.astype(str).str.contains(r'^\s+|\s+$',na=False)).sum().sum()
+  leading_trailing_spaces_unprocessed = unprocessed_spaces_df.apply(lambda col: col.astype(str).str.contains(r'^\s+|\s+$',na=False)).sum().sum()
 
   # removes extra spaces at the begining and end
   unprocessed_spaces_df[unprocessed_spaces_df.columns] = unprocessed_spaces_df.apply(lambda x: x.str.strip())
