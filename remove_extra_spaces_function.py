@@ -19,17 +19,30 @@ def remove_extra_spaces_function(processed_duplicates_df):
 
   # SPACES IN MIDDLE 
 
-  # count total number of extra spaces
-  unprocessed_total_matches = unprocessed_spaces_df.apply(lambda col: col.astype(str).apply(lambda x: sum(len(m) - 1 for m in re.findall(r'[ ]{2,}', x)))).sum().sum()
+  # count total number of extra spaces per column
+  extra_spaces_instruction_unprocessed = unprocessed_spaces_df['instruction'].astype(str).apply(lambda x: sum(len(m) - 1 for m in re.findall(r'[ ]{2,}', x))).sum()
+  extra_spaces_input_unprocessed = unprocessed_spaces_df['input'].astype(str).apply(lambda x: sum(len(m) - 1 for m in re.findall(r'[ ]{2,}', x))).sum()
+  extra_spaces_output_unprocessed = unprocessed_spaces_df['output'].astype(str).apply(lambda x: sum(len(m) - 1 for m in re.findall(r'[ ]{2,}', x))).sum()
 
   # removes the extra spaces except extra lines
   processed_spaces_df = unprocessed_spaces_df.astype(str).replace(r'[ \t]+', ' ', regex=True)
   
-  # count total number of extra spaces
-  processed_total_matches = processed_spaces_df.apply(lambda col: col.astype(str).apply(lambda x: sum(len(m) - 1 for m in re.findall(r'[ ]{2,}', x)))).sum().sum()
+  # count total number of extra spaces per column
+  extra_spaces_instruction_processed = processed_spaces_df['instruction'].astype(str).apply(lambda x: sum(len(m) - 1 for m in re.findall(r'[ ]{2,}', x))).sum()
+  extra_spaces_input_processed = processed_spaces_df['input'].astype(str).apply(lambda x: sum(len(m) - 1 for m in re.findall(r'[ ]{2,}', x))).sum()
+  extra_spaces_output_processed = processed_spaces_df['output'].astype(str).apply(lambda x: sum(len(m) - 1 for m in re.findall(r'[ ]{2,}', x))).sum()
 
   # gets the size of the dataset
   extra_spaces_ds = len(processed_spaces_df)
   
   # returns variables used within the function
-  return(leading_trailing_spaces_unprocessed,leading_trailing_spaces_processed,unprocessed_total_matches,processed_total_matches, extra_spaces_ds, processed_spaces_df)
+  return(leading_trailing_spaces_unprocessed,
+         leading_trailing_spaces_processed, 
+         extra_spaces_instruction_unprocessed, 
+         extra_spaces_input_unprocessed, 
+         extra_spaces_output_unprocessed,
+         extra_spaces_instruction_processed, 
+         extra_spaces_input_processed, 
+         extra_spaces_output_processed,
+         extra_spaces_ds,
+         processed_spaces_df)
