@@ -12,6 +12,9 @@ def remove_qm_flashcards_function(processed_duplicates_df):
   # the subset getting checked
   flashcards_subset = unprocessed_qm_output_df['subset_source'] == 'medical_meadow_medical_flashcards' 
 
+  # strips the output
+  unprocessed_qm_output_df.loc[flashcards_subset, 'output'] = unprocessed_qm_output_df.loc[flashcards_subset, 'output'].astype(str).str.strip()
+  
   # gets the length of the subset with question marks (using \s* to catch hidden spaces)
   qm_count_unprocessed = unprocessed_qm_output_df[flashcards_subset]['output'].astype(str).apply(lambda x: len(re.findall(r'\?\s*$', x))).sum()
 
