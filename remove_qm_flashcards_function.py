@@ -6,7 +6,7 @@ def remove_qm_flashcards_function(processed_duplicates_df):
   # gives the dataframe another name
   unprocessed_qm_output_df = processed_duplicates_df
 
-  # gets the original size of the dataset
+  # gets the subset  used
   unprocessed_qm_ds = (unprocessed_qm_output_df['subset_source'] == 'medical_meadow_medical_flashcards').sum()
 
   # the subset getting checked
