@@ -1,4 +1,4 @@
-# import re library since wasn't working outside
+# import re library
 import re
 
 def remove_qm_flashcards_function(processed_duplicates_df):
