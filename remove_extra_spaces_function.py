@@ -1,11 +1,10 @@
+# import re library
 import re
 
 def remove_extra_spaces_function(processed_qm_output_df):
 
-  # gives the dataframe another name
-  unprocessed_spaces_df = processed_qm_output_df
-
-  # SPACES AT START AND END
+  # creates another copy of the dataframe
+  unprocessed_spaces_df = processed_qm_output_df.copy()
 
   # count number of cells with extra spaces at the start or end (using \s to catch newlines)
   leading_trailing_spaces_unprocessed = unprocessed_spaces_df.apply(lambda col: col.str.contains(r'^\s+|\s+$', na=False)).sum().sum()
@@ -16,8 +15,6 @@ def remove_extra_spaces_function(processed_qm_output_df):
 
   # count number of cells with extra spaces at the start or end AFTER cleaning
   leading_trailing_spaces_processed = unprocessed_spaces_df.apply(lambda col: col.str.contains(r'^\s+|\s+$', na=False)).sum().sum()
-
-  # SPACES IN MIDDLE 
 
   # count total number of extra spaces per column
   extra_spaces_instruction_unprocessed = unprocessed_spaces_df['instruction'].apply(lambda x: sum(len(m) - 1 for m in re.findall(r'[ ]{2,}', x))).sum()
@@ -33,10 +30,10 @@ def remove_extra_spaces_function(processed_qm_output_df):
   extra_spaces_input_processed = processed_spaces_df['input'].apply(lambda x: sum(len(m) - 1 for m in re.findall(r'[ ]{2,}', x))).sum()
   extra_spaces_output_processed = processed_spaces_df['output'].apply(lambda x: sum(len(m) - 1 for m in re.findall(r'[ ]{2,}', x))).sum()
 
-  # gets the size of the dataset
+  # gets the length of the processed dataframe
   extra_spaces_ds = len(processed_spaces_df)
   
-  # returns variables used within the function
+  # return the variables that are used inside this function
   return(leading_trailing_spaces_unprocessed,
          leading_trailing_spaces_processed, 
          extra_spaces_instruction_unprocessed, 
